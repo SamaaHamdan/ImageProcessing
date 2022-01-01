@@ -1,10 +1,11 @@
-function result = Brightness(im, op, k)
+function result = darkness(im, op, k)
     im = double(im);
     
-    if op=='+'
-        result = im + k;
-    elseif op=='/'
-        result = im / k;
+
+    if op=='-'
+        result = im - k;
+    elseif op=='*'
+        result = im * k;
     end
     
     [H, W, L] = size(result);
