@@ -114,7 +114,7 @@ function RGB2binary_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 img=handles.a;
 T=getappdata(0,'thre');
-result = RGB2Binary(im, T);
+result = RGB2Binary(img, T);
 axes(handles.axes2);
 imshow(result);
 
@@ -126,11 +126,9 @@ function Brightness_Callback(hObject, eventdata, handles)
 img=handles.a;
 op=getappdata(0,'opt');
 k=getappdata(0,'k');     %double is used to bright in case of + and /
-
+result = Brightness(img, op, k);
 axes(handles.axes2);
 imshow(result);
-handles.result=result;
-guidata(hObject, handles);
 
 % --- Executes on button press in Darkness.
 function Darkness_Callback(hObject, eventdata, handles)
@@ -140,11 +138,9 @@ function Darkness_Callback(hObject, eventdata, handles)
 img=handles.a;
 op=getappdata(0,'darkop');
 k=getappdata(0,'KK');   %double is used to dark in case of - and *
-
+result = darkness(img, op, k);
 axes(handles.axes2);
 imshow(result);
-handles.result=result;
-guidata(hObject, handles);
 
 
 % --- Executes on button press in Log.
@@ -155,11 +151,9 @@ function Log_Callback(hObject, eventdata, handles)
 img=handles.a;
 c=getappdata(0,'const');
 
-
+s = Log(img, c);
 axes(handles.axes2);
 imshow(s);
-handles.s=s;
-guidata(hObject, handles);
 
 
 % --- Executes on button press in Exponential.
@@ -170,11 +164,9 @@ function Exponential_Callback(hObject, eventdata, handles)
 img=handles.a;
 c=getappdata(0,'const');
 
-
+s = InvLog(img, c);
 axes(handles.axes2);
-imshow(S);
-handles.S=S;
-guidata(hObject, handles);
+imshow(s);
 
 
 % --- Executes on button press in Negative.
@@ -184,11 +176,9 @@ function Negative_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 img=handles.a;
 
-
+S = Negative(img);
 axes(handles.axes2);
 imshow(S);
-handles.S=S;
-guidata(hObject, handles);
        
 % --- Executes on button press in Gamma.
 function Gamma_Callback(hObject, eventdata, handles)
@@ -199,27 +189,19 @@ img=handles.a;
 c=getappdata(0,'const');
 y=getappdata(0,'Y');
 
+S= Gamma(img, c, y);
+
 axes(handles.axes2);
 imshow(S);
-handles.S=S;
-guidata(hObject, handles);
 
 % --- Executes on button press in ContrastStretch.
 function ContrastStretch_Callback(hObject, eventdata, handles)
-% hObject    handle to ContrastStretch (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-%itemp=handles.a;
-%itemp=im2double(itemp);
-itemp = imread('pout.tif'); %read the image
-axes(handles.axes1);
-imshow(itemp);
-handles.itemp=itemp;
+img=handles.a;
+%itemp = imread('pout.tif'); %read the image
+S = Constract_Stertching(img);
 
 axes(handles.axes2);
-imshow(S);
-handles.S=S;
-guidata(hObject, handles);  
+imshow(S);  
 
 % --- Executes on button press in Histogram.
 function Histogram_Callback(hObject, eventdata, handles)
@@ -228,11 +210,9 @@ function Histogram_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 img=handles.a;
 
-
+s=drawHist(img);
 axes(handles.axes2);
-handles.g=S;
-guidata(hObject, handles);
-imshow(img);
+imshow(s);
 
 % --- Executes on button press in correlationFilter.
 function correlationFilter_Callback(hObject, eventdata, handles)
@@ -241,11 +221,9 @@ function correlationFilter_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 img=handles.a;
 option=getappdata(0,'optioncorrelation');
-
+S=correlationFilter(img,option);
 axes(handles.axes2);
 imshow(S);
-handles.S=S;
-guidata(hObject, handles);    
 
 % --- Executes on button press in Idealfilter.
 function Idealfilter_Callback(hObject, eventdata, handles)
@@ -255,11 +233,9 @@ function Idealfilter_Callback(hObject, eventdata, handles)
 image=handles.a;
 option=getappdata(0,'optionideal');
 D0=getappdata(0,'Dideal');
-
+S=IdealFilter(image,D0,option);
 axes(handles.axes2);
-imshow(S);
-handles.S=S;
-guidata(hObject, handles);    
+imshow(S);  
 
 % --- Executes on button press in GuassianFilter.
 function GuassianFilter_Callback(hObject, eventdata, handles)
@@ -269,11 +245,9 @@ function GuassianFilter_Callback(hObject, eventdata, handles)
 image=handles.a;
 option=getappdata(0,'gaussop');
 D0=getappdata(0,'guassD0');
-
+S=GaussianFilter(image,D0,option);
 axes(handles.axes2);
 imshow(S);
-handles.S=S;
-guidata(hObject, handles);    
 
 % --- Executes on button press in domain.
 function domain_Callback(hObject, eventdata, handles)
@@ -282,12 +256,9 @@ function domain_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 image=handles.a;
 option=getappdata(0,'domainop');
-
+S=DomainConversions(image, option);
 axes(handles.axes2);
 imshow(S);
-handles.S=S;
-guidata(hObject, handles);    
-
 
 
 function rgb2grayoption_Callback(hObject, eventdata, handles)
