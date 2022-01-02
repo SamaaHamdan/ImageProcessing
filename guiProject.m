@@ -235,7 +235,7 @@ option=getappdata(0,'optionideal');
 D0=getappdata(0,'Dideal');
 S=IdealFilter(image,D0,option);
 axes(handles.axes2);
-imshow(S);  
+imshow(S);   
 
 % --- Executes on button press in GuassianFilter.
 function GuassianFilter_Callback(hObject, eventdata, handles)
@@ -258,7 +258,8 @@ image=handles.a;
 option=getappdata(0,'domainop');
 S=DomainConversions(image, option);
 axes(handles.axes2);
-imshow(S);
+imshow(S);  
+
 
 
 function rgb2grayoption_Callback(hObject, eventdata, handles)
@@ -758,8 +759,6 @@ function Butterworth_Callback(hObject, eventdata, handles)
 image=handles.a;
 option=getappdata(0,'optionbutter');
 D0=getappdata(0,'Dbutter');
-
+S=ButterworthFilter(image,D0,option);
 axes(handles.axes2);
-imshow(S);
-handles.S=S;
-guidata(hObject, handles);    
+imshow(S);   
